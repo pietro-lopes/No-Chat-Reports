@@ -8,6 +8,7 @@ import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.common.Mod.EventBusSubscriber;
@@ -53,6 +54,11 @@ public class NoChatReports implements PlatformProvider {
 			Minecraft client = Minecraft.getInstance();
 			ClientPacketListener handler = client.getConnection();
 			ClientEvents.PLAY_READY.invoker().handle(handler, client);
+		}
+		
+		@SubscribeEvent
+		public static void onServerStarted(ServerStartedEvent event) {
+			// NO-OP, see https://github.com/Aizistral-Studios/No-Chat-Reports/issues/473
 		}
 		
 	}
