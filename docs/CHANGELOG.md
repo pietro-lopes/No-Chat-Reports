@@ -1,3 +1,7 @@
+#### **\[Build 1.20.4-v2.6.1\]:**
+
+- Fixed startup crash on dedicated servers with NeoForge ([#473](https://github.com/Aizistral-Studios/No-Chat-Reports/issues/473)).
+
 #### **\[Build 1.20.4-v2.6.0\]:**
 
 - Added support for NeoForge ([big thanks to embeddedt, #464](https://github.com/Aizistral-Studios/No-Chat-Reports/pull/464));
