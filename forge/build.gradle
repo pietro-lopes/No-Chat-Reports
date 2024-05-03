@@ -67,6 +67,7 @@ mixin {
 minecraft {
 	println("Specifying MCP mappings...")
     mappings channel: 'official', version: minecraft_version
+	
 	println("Specifying Access Transformer configuration...")	
 	accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 	
@@ -123,7 +124,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${forge_version}"
 	implementation "generic:modmenu:5.0.2"
 	implementation "generic:fabric-annotations:v1.0.0"
-	implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:" + rootProject.cloth_config_version)
+	implementation "generic:cloth-config-api:14.0.126"
 	annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }
 
