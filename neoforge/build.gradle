@@ -18,8 +18,11 @@ buildscript {
 }
 
 plugins {
+	id 'java-library'
+    id 'eclipse'
+    id 'idea'
     id "com.modrinth.minotaur" version "2.+"
-    id "net.neoforged.gradle.userdev" version "7.0.94"
+    id 'net.neoforged.gradle.userdev' version '7.0.109'
 }
 
 println("Applying plugins...")
@@ -77,6 +80,10 @@ runs {
 
 sourceSets.main.resources {
     // NO-OP
+}
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
 }
 
 repositories {
@@ -199,6 +206,18 @@ tasks.updateResources.dependsOn processResources
 //tasks.withType(JavaCompile) {
 //    options.failOnError(true)
 //}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
 
 publishing {
 
