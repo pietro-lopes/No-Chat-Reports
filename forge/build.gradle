@@ -19,7 +19,7 @@ buildscript {
 		}
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.0.18'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '[6.0.24,6.2)'
 		classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.4.0'
         classpath 'org.spongepowered:mixingradle:0.7.+'
     }
@@ -70,6 +70,9 @@ minecraft {
 	
 	println("Specifying Access Transformer configuration...")	
 	accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+	
+    reobf = false
+    copyIdeResources = true
 	
 	runs {
         client {
