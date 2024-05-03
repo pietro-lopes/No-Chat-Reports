@@ -46,7 +46,7 @@ group = "${maven_group}"
 archivesBaseName = "${archives_base_name}"
 
 println("Specifying Java compatibility...")
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 println("Java Installation Data:")
 println(" - Java Version: " + System.getProperty('java.version'))
@@ -193,7 +193,7 @@ curseforge {
         changelog = rootProject.file('docs/CHANGELOG.md')
 		
 		addGameVersion project.minecraft_version
-		addGameVersion "Java 17"
+		addGameVersion "Java 21"
 		addGameVersion "Forge"
 		
         //addArtifact(sourcesJar)
