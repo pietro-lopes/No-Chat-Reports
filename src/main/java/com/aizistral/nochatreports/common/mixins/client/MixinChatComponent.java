@@ -34,10 +34,8 @@ public class MixinChatComponent {
 	}
 
 	@ModifyVariable(method = "addMessage(Lnet/minecraft/network/chat/Component;"
-			+ "Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V",
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ComponentRenderUtils;"
-					+ "wrapComponents(Lnet/minecraft/network/chat/FormattedText;ILnet/minecraft/client/gui/Font;"
-					+ ")Ljava/util/List;", ordinal = 0, shift = Shift.AFTER), argsOnly = true)
+			+ "Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V",
+			at = @At(value = "HEAD"), argsOnly = true)
 	private synchronized GuiMessageTag modifyGUITag(GuiMessageTag tag) {
 		if (!NCRConfig.getEncryption().showEncryptionIndicators() || !this.lastMessageEncrypted)
 			return tag;
@@ -53,10 +51,9 @@ public class MixinChatComponent {
 	}
 
 	@ModifyArg(index = 0, method = "addMessage(Lnet/minecraft/network/chat/Component;"
-			+ "Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V",
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ComponentRenderUtils;"
-					+ "wrapComponents(Lnet/minecraft/network/chat/FormattedText;I"
-					+ "Lnet/minecraft/client/gui/Font;)Ljava/util/List;", ordinal = 0))
+			+ "Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/ChatComponent;"
+					+ "logChatMessage(Lnet/minecraft/client/GuiMessage;)V", ordinal = 0, shift = Shift.BEFORE))
 	private FormattedText modifyGUIMessage(FormattedText msg) {
 		if (NCRConfig.getCommon().enableDebugLog()) {
 			NCRCore.LOGGER.info("Adding chat message, structure: " +

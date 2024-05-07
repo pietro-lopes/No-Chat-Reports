@@ -73,14 +73,14 @@ public abstract class MixinChatScreen extends Screen {
 	}
 
 	@Inject(method = "handleChatInput", at = @At("HEAD"), cancellable = true)
-	private void onHandleChatInput(String string, boolean bl, CallbackInfoReturnable<Boolean> info) {
+	private void onHandleChatInput(String string, boolean bl, CallbackInfo info) {
 		if (NCRConfig.getServerPreferences().hasModeCurrent(SigningMode.ALWAYS) && !ServerSafetyState.allowChatSigning()) {
 			if (this.minecraft.getConnection().getConnection().isEncrypted()) {
 				if (!this.normalizeChatMessage(string).isEmpty()) {
 					ServerSafetyState.updateCurrent(ServerSafetyLevel.INSECURE);
 					ServerSafetyState.scheduleSigningAction(NCRClient::resendLastChatMessage);
 					ServerSafetyState.setAllowChatSigning(true);
-					info.setReturnValue(true);
+					info.cancel();
 				}
 			}
 		}
@@ -99,21 +99,21 @@ public abstract class MixinChatScreen extends Screen {
 
 				if (encrypt.length() > 0) {
 					int maxEncryptedLength = MESSAGE_MAX_LENGTH - noencrypt.length();
-					info.setReturnValue(noencrypt + getEncrypted(e, encrypt, maxEncryptedLength));
+					info.setReturnValue(noencrypt + this.getEncrypted(e, encrypt, maxEncryptedLength));
 				}
 			});
 		}
 	}
-	
+
 	private String getEncrypted(Encryptor<?> e, String encrypt, int maxLength) {
 		while (encrypt.length() > 0) {
 			String encrypted = e.encrypt("#%" + encrypt);
 			if (encrypted.length() <= maxLength)
 				return encrypted;
-			
+
 			encrypt = encrypt.substring(0, encrypt.length() - 1);
 		}
-		
+
 		return "";
 	}
 
