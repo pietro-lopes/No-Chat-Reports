@@ -146,6 +146,7 @@ public class EncryptionConfigScreen extends Screen {
 							this.unfocusFields();
 							this.onAlgorithmUpdate(value);
 						});
+		cycle.tooltip = new AdvancedWidgetTooltipHolder(cycle.tooltip.get());
 
 		this.addRenderableWidget(this.algorithmButton = cycle);
 

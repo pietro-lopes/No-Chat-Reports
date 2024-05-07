@@ -6,6 +6,7 @@ import com.aizistral.nochatreports.common.NCRCore;
 import com.aizistral.nochatreports.common.config.NCRConfig;
 import com.aizistral.nochatreports.common.encryption.Encryptor;
 
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.MutableComponent;
@@ -72,7 +73,7 @@ public class EncryptionUtil {
 	}
 
 	public static Component recreate(Component component) {
-		return Component.Serializer.fromJson(Component.Serializer.toJson(component));
+		return Component.Serializer.fromJson(Component.Serializer.toJson(component, RegistryAccess.EMPTY), RegistryAccess.EMPTY);
 	}
 
 }

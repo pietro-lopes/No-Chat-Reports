@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.GuiMessageTag;
 import net.minecraft.client.gui.components.ChatComponent;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
@@ -59,7 +60,7 @@ public class MixinChatComponent {
 	private FormattedText modifyGUIMessage(FormattedText msg) {
 		if (NCRConfig.getCommon().enableDebugLog()) {
 			NCRCore.LOGGER.info("Adding chat message, structure: " +
-					Component.Serializer.toJson((Component) msg));
+					Component.Serializer.toJson((Component) msg,  RegistryAccess.EMPTY));
 		}
 
 		var decrypted = EncryptionUtil.tryDecrypt((Component) msg);

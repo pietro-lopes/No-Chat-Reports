@@ -25,3 +25,9 @@ extendable method net/minecraft/client/gui/components/AbstractWidget render (Lne
 
 #accessible method net/minecraft/client/gui/components/Tooltip createTooltipPositioner (ZZLnet/minecraft/client/gui/navigation/ScreenRectangle;)Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;
 #extendable method net/minecraft/client/gui/components/Tooltip createTooltipPositioner (ZZLnet/minecraft/client/gui/navigation/ScreenRectangle;)Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;
+
+accessible field net/minecraft/client/gui/components/AbstractWidget tooltip Lnet/minecraft/client/gui/components/WidgetTooltipHolder;
+mutable field net/minecraft/client/gui/components/AbstractWidget tooltip Lnet/minecraft/client/gui/components/WidgetTooltipHolder;
+
+accessible method net/minecraft/client/gui/components/WidgetTooltipHolder createTooltipPositioner (Lnet/minecraft/client/gui/navigation/ScreenRectangle;ZZ)Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;
+extendable method net/minecraft/client/gui/components/WidgetTooltipHolder createTooltipPositioner (Lnet/minecraft/client/gui/navigation/ScreenRectangle;ZZ)Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;

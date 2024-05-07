@@ -234,7 +234,7 @@ tasks.updateResources.dependsOn processResources
 //    options.failOnError(true)
 //}
 
-jar.finalizedBy('reobfJar') 
+//jar.finalizedBy('reobfJar') 
 //publish.dependsOn('reobfJar')
 
 publishing {

@@ -10,9 +10,9 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.common.Mod.EventBusSubscriber;
-import net.neoforged.fml.common.Mod.EventBusSubscriber.Bus;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
 
@@ -45,7 +45,7 @@ public class NoChatReports implements PlatformProvider {
 		return FMLPaths.CONFIGDIR.get();
 	}
 	
-	@EventBusSubscriber(modid = "nochatreports", bus = Bus.FORGE)
+	@EventBusSubscriber(modid = "nochatreports", bus = Bus.GAME)
 	public static class Events {
 		
 		@SubscribeEvent
