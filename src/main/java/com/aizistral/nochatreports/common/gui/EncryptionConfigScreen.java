@@ -173,7 +173,7 @@ public class EncryptionConfigScreen extends Screen {
 			this.passField.setEditable(false);
 		}
 
-		this.renderBackground(graphics, j, j, f);
+		super.render(graphics, i, j, f);
 		graphics.drawCenteredString(this.font, HEADER, this.width / 2, this.hugeGUI() ? 8 : 16, 0xFFFFFF);
 
 		this.keyDesc.renderLeftAligned(graphics, this.keyField.getX() - 20, (this.hugeGUI() ? 25 : FIELDS_Y_START), this.getLineHeight(), 0xFFFFFF);
@@ -188,8 +188,6 @@ public class EncryptionConfigScreen extends Screen {
 		//		if (this.algorithmButton != null && this.algorithmButton.isMouseOver(i, j)) {
 		//			this.renderTooltip(poseStack, this.algorithmButton.getTooltip(), i, j);
 		//		}
-
-		super.render(graphics, i, j, f);
 
 		if (StringUtil.isNullOrEmpty(this.keyField.getValue()) && !this.keyField.isFocused()) {
 			graphics.drawString(this.font,
