@@ -75,34 +75,29 @@ minecraft {
     copyIdeResources = true
 	
 	runs {
+		 configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+        }
+
+	
         client {
 			properties 'org.gradle.jvmargs': '-Xms4G -Xmx4G'
 			properties 'fml.earlyprogresswindow': 'false'
 			properties 'mixin.env.disableRefMap': 'true'
-            workingDirectory project.file('run')
-
+			
+			property 'forge.enabledGameTestNamespaces', mod_id
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-
-            mods {
-                nochatreports {
-                    source sourceSets.main
-                }
-            }
         }
 
         server {
 			properties 'mixin.env.disableRefMap': 'true'
-            workingDirectory project.file('run')
-
+			property 'forge.enabledGameTestNamespaces', mod_id
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-
-            mods {
-                nochatreports {
-                    source sourceSets.main
-                }
-            }
+            args '--nogui'
         }
     }
 }
@@ -129,6 +124,9 @@ dependencies {
 	implementation "generic:fabric-annotations:v1.0.0"
 	implementation "generic:cloth-config-api:14.0.126"
 	annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+	
+	// Hack fix for now, force jopt-simple to be exactly 5.0.4 because Mojang ships that version, but some transtive dependencies request 6.0+ 
+    implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
 }
 
 

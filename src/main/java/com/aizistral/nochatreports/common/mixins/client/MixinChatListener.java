@@ -23,6 +23,7 @@ import com.aizistral.nochatreports.common.gui.UnsafeServerScreen;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.ChatScreen;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.chat.ChatListener;
 import net.minecraft.client.multiplayer.chat.ChatTrustLevel;
 import net.minecraft.core.RegistryAccess;
@@ -64,8 +65,10 @@ public class MixinChatListener {
 				}
 
 				if (NCRConfig.getServerPreferences().hasModeCurrent(SigningMode.PROMPT)) {
-					Minecraft.getInstance().setScreen(new UnsafeServerScreen(Minecraft.getInstance().screen
-							instanceof ChatScreen chat ? chat : new ChatScreen("")));
+					Screen returnScreen = Minecraft.getInstance().screen instanceof ChatScreen chat ? chat
+							: new ChatScreen("");
+					Screen unsafeScreen = new UnsafeServerScreen(returnScreen);
+					Minecraft.getInstance().setScreen(unsafeScreen);
 
 					if (NCRConfig.getClient().hideSigningRequestMessage()) {
 						info.cancel();
