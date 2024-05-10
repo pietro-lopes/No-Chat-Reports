@@ -10,7 +10,7 @@
 	"server.MixinServerCommonPacketListenerImpl",
 	"server.MixinPlayerList",
 	"server.MixinServerboundChatSessionUpdatePacket",
-	"server.MixinServerboundChatCommandPacket"
+	"server.MixinServerboundChatCommandSignedPacket"
   ],
   "client": [
 	"client.MixinOptions",

@@ -103,7 +103,7 @@ public class MixinChatListener {
 		// Debug never dies
 		if (NCRConfig.getCommon().enableDebugLog()) {
 			NCRCore.LOGGER.info("Received message: {}, from: {}, signature: {}",
-					Component.Serializer.toJson(playerChatMessage.unsignedContent(), RegistryAccess.EMPTY),
+					Component.Serializer.toJson(playerChatMessage.decoratedContent(), RegistryAccess.EMPTY),
 					playerChatMessage.link().sender(),
 					Base64.getEncoder().encodeToString(playerChatMessage.signature() != null ? playerChatMessage.signature().bytes() : new byte[0]));
 		}
