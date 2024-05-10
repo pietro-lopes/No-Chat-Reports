@@ -1,3 +1,7 @@
+#### **\[Build 1.20.6-v2.7.0\]:**
+
+- Initial port to 1.20.6 (but should work for 1.20.5 too).
+
 #### **\[Build 1.20.4-v2.6.1\]:**
 
 - Fixed startup crash on dedicated servers with NeoForge ([#473](https://github.com/Aizistral-Studios/No-Chat-Reports/issues/473)).
