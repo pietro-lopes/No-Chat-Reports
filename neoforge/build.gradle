@@ -125,13 +125,13 @@ jar {
 processResources {
 	println("Processing resources...")
 	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-	exclude 'META-INF/mods.toml'
+	exclude 'META-INF/neoforge.mods.toml'
 
     from("${project.projectDir}/docs/META-INF") {
-		println("Inflating mods.toml...")	
+		println("Inflating neoforge.mods.toml...")	
 	
 		// Replace properties in mods.toml with ones derived from settings.gradle
-        include 'mods.toml'
+        include 'neoforge.mods.toml'
         expand 'mod_license': mod_license, 
 		'mod_version': version, 
 		'mod_id' : mod_id, 
