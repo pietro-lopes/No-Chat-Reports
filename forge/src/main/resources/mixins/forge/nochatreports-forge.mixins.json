@@ -7,8 +7,7 @@
   "client": [
 	"client.MixinClientConnection",
 	"client.MixinClientHandshakePacketListenerImpl",
-	"client.MixinClientPacketListener",
-	"client.MixinServerStatusPinger$1"
+	"client.MixinClientPacketListener"
   ],
   "server": [],
   "injectors": {
