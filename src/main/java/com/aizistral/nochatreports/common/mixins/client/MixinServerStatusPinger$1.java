@@ -45,6 +45,13 @@ public abstract class MixinServerStatusPinger$1 implements ServerPingerExtension
 					+ "description()Lnet/minecraft/network/chat/Component;"))
 	private void getNoChatReports(ClientboundStatusResponsePacket packet, CallbackInfo info) {
 		boolean preventsReports = ((ServerDataExtension) (Object) packet.status()).preventsChatReports();
+
+		if (this.nochatreports$serverData == null) {
+			NCRCore.LOGGER.error("Failed to capture ServerData instance in MixinServerStatusPinger$1!");
+			NCRCore.LOGGER.catching(new IllegalStateException());
+			return;
+		}
+
 		this.nochatreports$serverData.setPreventsChatReports(preventsReports);
 
 		if (NCRConfig.getCommon().enableDebugLog()) {
