@@ -20,22 +20,24 @@ import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.protocol.status.ClientboundStatusResponsePacket;
 import net.minecraft.network.protocol.status.ServerStatus;
 
+
+/**
+ * This one ensures "preventsChatReports" property is transferred from {@link ServerStatus} to
+ * {@link ServerData} when handling status response.
+ * @author fxmorin (original implementation)
+ * @author Aizistral (current version)
+ * @author pietro-lopes (fixed https://github.com/Aizistral-Studios/No-Chat-Reports/issues/481)
+ */
+
 @Mixin(targets = "net/minecraft/client/multiplayer/ServerStatusPinger$1")
 public abstract class MixinServerStatusPinger$1 implements ServerPingerExtension {
-
-	/**
-	 * @reason Ensure "preventsChatReports" property is transferred from {@link ServerStatus} to
-	 * {@link ServerData} when handling status response.
-	 * @author fxmorin (original implementation)
-	 * @author Aizistral (current version)
-	 */
 
 	@Unique
 	private ServerDataExtension nochatreports$serverData;
 
 	@Inject(method = "<init>", at = @At("RETURN"))
 	private void captureServerData(ServerStatusPinger serverStatusPinger, Connection connection, ServerData serverData, Runnable runnable, Runnable runnable2, InetSocketAddress inetSocketAddress, ServerAddress serverAddress, CallbackInfo ci){
-		nochatreports$serverData = (ServerDataExtension) serverData;
+		this.nochatreports$serverData = (ServerDataExtension) serverData;
 	}
 
 	@Inject(method = "handleStatusResponse(Lnet/minecraft/network/protocol/status/ClientboundStatusResponsePacket;)V",
@@ -43,7 +45,7 @@ public abstract class MixinServerStatusPinger$1 implements ServerPingerExtension
 					+ "description()Lnet/minecraft/network/chat/Component;"))
 	private void getNoChatReports(ClientboundStatusResponsePacket packet, CallbackInfo info) {
 		boolean preventsReports = ((ServerDataExtension) (Object) packet.status()).preventsChatReports();
-		nochatreports$serverData.setPreventsChatReports(preventsReports);
+		this.nochatreports$serverData.setPreventsChatReports(preventsReports);
 
 		if (NCRConfig.getCommon().enableDebugLog()) {
 			NCRCore.LOGGER.info("Received status response packet from server, preventsChatReports: {}",
